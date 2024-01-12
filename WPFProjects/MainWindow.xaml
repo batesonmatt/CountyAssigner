@@ -10,6 +10,7 @@
     <Grid Grid.Column="0" Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -17,15 +18,17 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Label Content="Customers with no county:" Grid.Row="0"/>
-        <DataGrid x:Name="customerDataGrid" Grid.Row="1" Margin="0,0,0,10" SelectionMode="Single" SelectionChanged="CustomerDataGrid_SelectionChanged"/>
+        <Label Content="Select a customer from the list below, then choose an available county to assign." Grid.Row="0" FontStyle="Italic"/>
 
-        <Button x:Name="okButton" Content="OK" IsEnabled="False" Grid.Row="2" Width="85" HorizontalAlignment="Right" Click="OK_Click" />
+        <Label Content="Customers with no county:" Grid.Row="1"/>
+        <DataGrid x:Name="customerDataGrid" Grid.Row="2" Margin="0,0,0,10" SelectionMode="Single" SelectionChanged="CustomerDataGrid_SelectionChanged"/>
 
-        <Label Content="Counties for this state:" Grid.Row="3"/>
-        <DataGrid x:Name="countyDataGrid" Grid.Row="4" Margin="0,0,0,10" SelectionMode="Single" SelectionChanged="CountyDataGrid_SelectionChanged"/>
+        <Button x:Name="okButton" Content="OK" IsEnabled="False" Grid.Row="3" Width="85" HorizontalAlignment="Right" Click="OK_Click" />
 
-        <Button x:Name="updateButton" Content="Update" IsEnabled="False" Grid.Row="5" Width="85" HorizontalAlignment="Right" Click="Update_Click" />
+        <Label Content="Counties for this state:" Grid.Row="4"/>
+        <DataGrid x:Name="countyDataGrid" Grid.Row="5" Margin="0,0,0,10" SelectionMode="Single" SelectionChanged="CountyDataGrid_SelectionChanged"/>
+
+        <Button x:Name="updateButton" Content="Update" IsEnabled="False" Grid.Row="6" Width="85" HorizontalAlignment="Right" Click="Update_Click" />
     </Grid>
 
 </Window>

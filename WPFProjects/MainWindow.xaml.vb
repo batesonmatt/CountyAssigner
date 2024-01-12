@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 
 Class MainWindow
+
     Private Property CustomerData As DataView
     Private Property CountyData As DataView
 
@@ -81,7 +82,7 @@ Class MainWindow
 
     Private Function TryGetCustomerDataView() As Boolean
 
-        Dim sql = "select distinct c.CustomerID, c.CustomerName, c.City, c.State, c.StateID from Customers c with(nolock) where CountyID is null order by CustomerName"
+        Dim sql = "select distinct c.CustomerID, c.CustomerName, c.City, c.State, c.StateID from Customers c where CountyID is null order by CustomerName"
 
         CustomerData = GetDataView(sql)
 
@@ -94,7 +95,7 @@ Class MainWindow
         Dim success As Boolean = False
 
         If Not String.IsNullOrWhiteSpace(stateID) Then
-            Dim sql = "select c.ID, c.County from CountiesNew c with(nolock) where c.StateID=" & stateID & " order by c.County"
+            Dim sql = "select c.ID, c.County from CountiesNew c where c.StateID=" & stateID & " order by c.County"
             CountyData = GetDataView(sql)
             success = CountyData IsNot Nothing
         End If
@@ -151,17 +152,12 @@ Class MainWindow
                 trans.Commit()
             End If
 
-            trans = Nothing
-
         Catch ex As Exception
+            trans.Rollback()
             count = -1
         Finally
-            If trans IsNot Nothing Then
-                trans.Rollback()
-            End If
-            If con IsNot Nothing Then
-                con.Dispose()
-            End If
+            trans.Dispose()
+            con.Dispose()
         End Try
 
         Return count
